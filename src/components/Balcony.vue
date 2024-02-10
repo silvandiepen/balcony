@@ -75,7 +75,7 @@ const holders = computed(() => {
     --shadow-size: .075em;
     --shadow-size-minus: calc(var(--shadow-size) * -1);
 
-    font-size: 1.5vw;
+    font-size: 1.5vmin;
 
     &__roof {
         width: calc(100% + 4em);
