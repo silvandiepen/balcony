@@ -6,7 +6,7 @@
             <div :class="bemm('roof-bottom')"></div>
         </div>
         <div :class="bemm('windows')">
-            <div :class="bemm('window')" v-for="_ in windows">
+            <TransitionGroup name="windows" tag="div" :class="bemm('window')"  v-for="(_, idx) in holders" :key="idx">
                 <div :class="[bemm('frame'), bemm('frame', 'small')]">
                     <div :class="bemm('glass')"></div>
                 </div>
@@ -14,7 +14,7 @@
                 <div :class="[bemm('frame'), bemm('frame', 'large')]">
                     <div :class="bemm('glass')"></div>
                 </div>
-            </div>
+            </TransitionGroup>
 
         </div>
         <div :class="bemm('separator')">
@@ -22,9 +22,9 @@
             <div :class="bemm('separator-bottom')"></div>
         </div>
         <div :class="bemm('panels')">
-            <div :class="bemm('panel-frame')" v-for="_ in windows">
+            <TransitionGroup name="windows" tag="div" :class="bemm('panel-frame')"  v-for="(_, idx) in holders" :key="idx">
                 <div :class="bemm('panel')"></div>
-            </div>
+            </TransitionGroup>
         </div>
         <div :class="bemm('bottom')">
             <div :class="bemm('bottom-top')"></div>
@@ -36,9 +36,9 @@
                 <div :class="bemm('block-bottom')"></div>
             </div>
             <div :class="bemm('holders')">
-                <div :class="bemm('holder')" v-for="_ in holders">
+                <TransitionGroup name="windows" tag="div" :class="bemm('holder')" v-for="(_, idx) in holders" :key="idx">
                     <div :class="bemm('holder-block')"></div>
-                </div>
+                </TransitionGroup>
             </div>
         </div>
     </div>
@@ -61,6 +61,24 @@ const holders = computed(() => {
 </script>
 
 <style lang="scss">
+.windows-move, /* apply transition to moving elements */
+.windows-enter-active,
+.windows-leave-active {
+  transition: all 0.5s ease;
+}
+
+.windows-enter-from,
+.windows-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.windows-leave-active {
+  position: absolute;
+}
+
 .balcony {
 
 
