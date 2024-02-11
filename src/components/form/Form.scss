@@ -7,6 +7,7 @@
         background-color: transparent;
         border: none;
         font-size: 1em;
+        line-height: 1;
         width: 100%;
         color: currentColor;
         position: relative;
@@ -32,8 +33,8 @@
             top: 0;
             left: 0;
             opacity: 1;
-            border: 2px solid rgba(255, 255, 255, .25);
-            border-radius: 4px;
+            outline: 2px solid rgba(var(--foreground-rgb), .25);
+            border-radius: var(--input-border-radius, var(--border-radius));
 
             content: "";
             width: 100%;
@@ -51,9 +52,13 @@
 
     &__label {
         font-size: .875em;
-        padding: .75em 0;
+        // padding: .75em 0;
         display: block;
         font-weight: 500;
+
+        &+ [class*="control-container"]{
+            margin-top: .5em;
+        }
     }
 }
 
@@ -68,6 +73,12 @@
 }
 
 @mixin inputRange {
+    &__control-container {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+    }
+
     &__control {
 
         -webkit-appearance: none;
@@ -157,7 +168,7 @@
             content: "";
             width: calc(var(--input-checkbox-height) * 1.5);
             height: var(--input-checkbox-height);
-            border-radius: 1em;
+            border-radius: var(--input-border-radius, var(--border-radius));
             position: relative;
             cursor: pointer;
             transition: all .3s ease;
@@ -172,6 +183,171 @@
 
 }
 
+@mixin inputSwitch() {
+    display: flex;
+    flex-direction: column-reverse;
+
+    &__control-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: .5em;
+        width: fit-content;
+
+        &:has(:checked) {
+            &~.input-checkbox__label::before {
+                background-position: calc((var(--input-checkbox-height) * 0.5) + var(--input-checkbox-space)) var(--input-checkbox-space);
+
+            }
+        }
+
+        // border: 2px solid var(--foreground);
+        padding: calc(var(--space) / 2);
+        // border-radius: calc(var(--space));
+
+        position: relative;
+
+        &::before {
+            position: absolute;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            opacity: 1;
+            outline: 2px solid rgba(var(--foreground-rgb), .25);
+            border-radius: var(--input-border-radius, var(--border-radius));
+
+            content: "";
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__value {
+        padding: calc(var(--space) / 3) calc(var(--space) / 1.5);
+        border-radius: var(--input-border-radius, var(--border-radius));
+
+        background-color: var(--background);
+        color: var(--foreground);
+
+        &--active {
+            background-color: var(--foreground);
+            color: var(--background);
+        }
+
+        &--inactive {
+
+            // border: 1px solid red;
+        }
+    }
+
+    &__control {
+        opacity: 0;
+        position: absolute;
+        appearance: none;
+        -webkit-appearance: none;
+
+    }
+
+    &__label {
+        display: flex;
+        gap: .5em;
+    }
+
+}
+
+@mixin inputColor() {
+    @include inputBase();
+
+    &__control-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__control {
+        &--color {
+            padding: 0;
+            aspect-ratio: 1/1;
+            width: 2em;
+            height: 2em;
+            border-radius: 50%;
+
+
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+
+            &::-webkit-color-swatch-wrapper {
+                padding: 0;
+            }
+
+            &::-webkit-color-swatch {
+                border: 0;
+                border-radius: 50%;
+            }
+
+            &::-moz-color-swatch,
+            &::-moz-focus-inner {
+                border: 0;
+            }
+
+            &::-moz-focus-inner {
+                padding: 0;
+            }
+        }
+    }
+}
+
+@mixin formGroup() {
+
+    @include inputBase();
+
+    &__container {
+
+        display: flex;
+        gap: var(--space);
+        justify-content: space-between;
+    }
+
+    div [class*="__label"] {
+        padding: 0;
+        opacity: .5;
+    }
+
+}
+
+@mixin formField() {
+
+    @include inputBase();
+
+    padding: var(--space);
+    border-radius: var(--border-radius);
+    background-color: color-mix(in oklch, var(--background) 100%, black 50%);
+
+    &__container {
+
+        display: flex;
+        gap: var(--space);
+
+        flex-direction: column;
+
+    }
+
+    div [class*="__label"] {
+        padding: 0;
+        opacity: .5;
+    }
+
+}
+
+
+.form-group {
+    @include formGroup();
+}
+
+.form-field {
+    @include formField();
+}
 
 .input-date {
     @include inputBase();
@@ -201,4 +377,12 @@
 
 .input-checkbox {
     @include inputCheckbox();
+}
+
+.input-switch {
+    @include inputSwitch();
+}
+
+.input-color {
+    @include inputColor();
 }

@@ -4,7 +4,8 @@
             {{ label }}
         </label>
         <div :class="bemm('control-container')">
-            <input :class="bemm('control')" :placeholder="placeholder" type="color" v-model="value" />
+            <input :class="[bemm('control'), bemm('control','color')]" :placeholder="placeholder" type="color" v-model="value" />
+            <input :class="[bemm('control'), bemm('control','value')]" :placeholder="placeholder" type="text" v-model="value" />
         </div>
     </div>
 </template>

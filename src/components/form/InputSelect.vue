@@ -5,11 +5,11 @@
         </label>
 
         <div :class="bemm('control-container')">
-        <select :class="bemm('control')" :placeholder="placeholder" v-model="value">
-            <option v-for="option in optionsObject" :key="option.value" :value="option.value">
-                {{ option.label }}
-            </option>
-        </select>
+            <select :class="bemm('control')" :placeholder="placeholder" v-model="value">
+                <option v-for="option in optionsObject" :key="option.value" :value="option.value">
+                    {{ option.label }}
+                </option>
+            </select>
         </div>
     </div>
 </template>
@@ -45,7 +45,7 @@ const optionsObject = computed<Option[]>(() => {
                 label: option,
                 value: option
             }
-        } else if(option.label && option.value) {
+        } else if (option.label && option.value) {
             return option
         } else {
             console.log(option)
