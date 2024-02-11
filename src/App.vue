@@ -1,15 +1,17 @@
 
 
 <template>
-  <div :class="bemm('tools')">
-    <Form>
-    <InputNumber label="Windows" v-model="windows"></InputNumber>
-    <InputColor label="Balcony color" v-model="color"></InputColor>
-    <InputColor label="Wall color" v-model="wall"></InputColor>
-  </Form>
-  </div>
-  <div :class="bemm('wall')" :style="`--wall: ${wall}`">
-    <Balcony></Balcony>
+  <div :class="bemm()">
+    <div :class="bemm('tools')">
+      <Form>
+        <InputNumber label="Windows" v-model="windows"></InputNumber>
+        <InputColor label="Balcony color" v-model="color"></InputColor>
+        <InputColor label="Wall color" v-model="wall"></InputColor>
+      </Form>
+    </div>
+    <div :class="bemm('wall')" :style="`--wall: ${wall}`">
+      <Balcony></Balcony>
+    </div>
   </div>
 </template>
 
@@ -41,6 +43,10 @@ const bemm = useBemm('app');
     justify-content: center;
     background-image: radial-gradient(ellipse at center, var(--wall) 50%, var(--dark-wall) 100%);
 
+    @media screen and (width <=768px) {
+      height: 100vw;
+      width: 100vw;
+    }
   }
 
   &__tools {
@@ -51,9 +57,19 @@ const bemm = useBemm('app');
     flex-direction: column;
     padding: 1em;
     border-radius: .25em;
-   background-color: rgb(var(--dark-rgb), .75);
-   color: var(--light);
-   width: 10em;
+    background-color: rgb(var(--dark-rgb), .75);
+    color: var(--light);
+    width: 10em;
+
+    @media screen and (width <=768px) {
+      position: static;
+      width: 100%;
+    }
+  }
+
+  @media screen and (width <=768px) {
+    display: flex;
+    flex-direction: column-reverse;
   }
 }
 </style>
