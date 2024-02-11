@@ -12,16 +12,20 @@
 </template>
 
 <script lang="ts" setup>
-import { watch, PropType, computed } from "vue";
+import { PropType, computed } from "vue";
 import { useBemm } from 'bemm';
 const bemm = useBemm('input-switch');
+
+interface SwitchOption {
+    value: string, label: string
+}
 const props = defineProps({
     label: {
         type: String,
         default: ""
     },
     values: {
-        type: Array as PropType<string[] | { value: string, label: string }[]>,
+        type: Array as PropType<string[] | SwitchOption[]>,
         default: ""
     },
 
@@ -37,11 +41,11 @@ const formattedValues = computed<{ label: string, value: string }[]>(() => {
             return {
                 label: v,
                 value: v
-            }
+            } as SwitchOption
         })
     }
     else if (typeof props.values[0] == 'object' && props.values[0].value && props.values[0].label) {
-        return props.values
+        return props.values as SwitchOption[]
     } else {
         return []
     }
@@ -50,8 +54,6 @@ const formattedValues = computed<{ label: string, value: string }[]>(() => {
 })
 
 const handleClick = (value: string) => {
-    console.log('something');
-    console.log(value);
     emit('update:modelValue', value)
 }
 
