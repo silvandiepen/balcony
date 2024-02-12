@@ -70,7 +70,7 @@ const holders = computed(() => {
 .windows-enter-from,
 .windows-leave-to {
   opacity: 0;
-  transform: translateX(30px);
+  transform: scale(0);
 }
 
 /* ensure leaving items are taken out of layout flow so that moving
@@ -105,7 +105,7 @@ const holders = computed(() => {
 
         &-top {
             width: 100%;
-            height: 3em;
+            height: 2em;
             background-color: var(--balcony-color);
             border-radius: var(--shadow-size);
             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.125), rgba(0, 0, 0, 0.05));
@@ -320,7 +320,7 @@ const holders = computed(() => {
             top: 100%;
             width: calc(100% + 2em);
             margin-left: -1em;
-            height: 6em;
+            height: 4em;
             background-image: radial-gradient(ellipse at 50% 0%, var(--dark-wall) 0%, rgba(0, 0, 0, 0) 66.66%);
             transform: scaleX(.85);
             z-index: -2;
@@ -335,8 +335,8 @@ const holders = computed(() => {
         z-index: 12;
 
         &-block {
-            width: 4em;
-            height: 6em;
+            width: 2em;
+            height: 4em;
             background-color: var(--balcony-color);
             border-radius: var(--shadow-size);
             background-color: var(--limestone);

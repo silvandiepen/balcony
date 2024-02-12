@@ -4,7 +4,7 @@
   <div :class="bemm()">
     <div :class="bemm('tools')">
       <Form>
-        <InputNumber label="Windows" v-model="windows"></InputNumber>
+        <InputRange label="Windows" v-model="windows" min="1" max="6"></InputRange>
         <InputColor label="Balcony color" v-model="color"></InputColor>
         <InputColor label="Wall color" v-model="wall"></InputColor>
       </Form>
@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import Balcony from './components/Balcony.vue';
 import { useBalcony } from './composables/useBalcony';
-import { InputNumber, InputColor, Form } from '@/components/form';
+import { InputRange, InputColor, Form } from '@/components/form';
 
 const { windows, color, wall } = useBalcony();
 
@@ -59,11 +59,13 @@ const bemm = useBemm('app');
     border-radius: .25em;
     background-color: rgb(var(--dark-rgb), .75);
     color: var(--light);
-    width: 10em;
+    width: 15em;
 
     @media screen and (width <=768px) {
+      background-color: rgb(var(--dark-rgb), 1);
       position: static;
       width: 100%;
+      border-radius: 0em;
     }
   }
 
