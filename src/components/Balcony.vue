@@ -105,7 +105,7 @@ const holders = computed(() => {
 
         &-top {
             width: 100%;
-            height: 2 zxem;
+            height: 2em;
             background-color: var(--balcony-color);
             border-radius: var(--shadow-size);
             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.125), rgba(0, 0, 0, 0.05));

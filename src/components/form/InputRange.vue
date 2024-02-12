@@ -5,8 +5,8 @@
         </label>
 
         <div :class="bemm('control-container')">
-            <input style="width: 60px" type="number" :class="bemm('value')" v-model="model"
-                v-on:input="emit('update:modelValue', numberModel)" />
+            <input style="width: 60px" type="number" :class="bemm('value')" v-model="model" :min="min" :max="max"
+                :step="step" v-on:input="emit('update:modelValue', numberModel)" />
             <input :class="bemm('control')" :placeholder="placeholder" type="range" v-model="model" :min="min" :max="max"
                 :step="step" v-on:input="emit('update:modelValue', numberModel)" />
         </div>

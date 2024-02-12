@@ -56,7 +56,7 @@
         display: block;
         font-weight: 500;
 
-        &+ [class*="control-container"]{
+        &+[class*="control-container"] {
             margin-top: .5em;
         }
     }
@@ -295,6 +295,21 @@
                 padding: 0;
             }
         }
+    }
+
+    &__suggestions{
+        padding: 1em;
+    }
+    &__suggestion-list{
+        list-style-type: none; margin: 0; padding: 0; display: flex; gap: calc(var(--space) / 2)
+    }
+
+    &__color {
+        width: 1.5em;
+        height: 1.5em;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        background-color: var(--color);
     }
 }
 
