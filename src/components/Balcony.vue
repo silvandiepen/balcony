@@ -1,12 +1,12 @@
 <template>
     <div :class="bemm()" :style="`--balcony-color: ${color}`">
-
         <div :class="bemm('roof')">
             <div :class="bemm('roof-top')"></div>
             <div :class="bemm('roof-bottom')"></div>
         </div>
         <div :class="bemm('windows')">
-            <TransitionGroup name="windows" tag="div" :class="bemm('window')"  v-for="(_, idx) in holders" :key="idx">
+
+            <div :class="bemm('window')" v-for="(_, idw) in windows" :key="idw">
                 <div :class="[bemm('frame'), bemm('frame', 'small')]">
                     <div :class="bemm('glass')"></div>
                 </div>
@@ -14,7 +14,7 @@
                 <div :class="[bemm('frame'), bemm('frame', 'large')]">
                     <div :class="bemm('glass')"></div>
                 </div>
-            </TransitionGroup>
+            </div>
 
         </div>
         <div :class="bemm('separator')">
@@ -22,9 +22,9 @@
             <div :class="bemm('separator-bottom')"></div>
         </div>
         <div :class="bemm('panels')">
-            <TransitionGroup name="windows" tag="div" :class="bemm('panel-frame')"  v-for="(_, idx) in holders" :key="idx">
+            <div :class="bemm('panel-frame')" v-for="(_, idp) in windows" :key="idp">
                 <div :class="bemm('panel')"></div>
-            </TransitionGroup>
+            </div>
         </div>
         <div :class="bemm('bottom')">
             <div :class="bemm('bottom-top')"></div>
@@ -36,9 +36,9 @@
                 <div :class="bemm('block-bottom')"></div>
             </div>
             <div :class="bemm('holders')">
-                <TransitionGroup name="windows" tag="div" :class="bemm('holder')" v-for="(_, idx) in holders" :key="idx">
+                <div :class="bemm('holder')" v-for="(_, idh) in holders" :key="idh">
                     <div :class="bemm('holder-block')"></div>
-                </TransitionGroup>
+                </div>
             </div>
         </div>
     </div>
@@ -56,28 +56,28 @@ const holders = computed(() => {
     if (windows.value == 1) return 1;
     if (windows.value == 2) return 2;
     return windows.value - 1;
-
 });
+
 </script>
 
 <style lang="scss">
-.windows-move, /* apply transition to moving elements */
-.windows-enter-active,
-.windows-leave-active {
-  transition: all 0.5s ease;
-}
+// .windows-move, /* apply transition to moving elements */
+// .windows-enter-active,
+// .windows-leave-active {
+//   transition: all 0.5s ease;
+// }
 
-.windows-enter-from,
-.windows-leave-to {
-  opacity: 0;
-  transform: scale(0);
-}
+// .windows-enter-from,
+// .windows-leave-to {
+//   opacity: 0;
+//   transform: scale(0);
+// }
 
-/* ensure leaving items are taken out of layout flow so that moving
-   animations can be calculated correctly. */
-.windows-leave-active {
-  position: absolute;
-}
+// /* ensure leaving items are taken out of layout flow so that moving
+//    animations can be calculated correctly. */
+// .windows-leave-active {
+//   position: absolute;
+// }
 
 .balcony {
 
@@ -105,7 +105,7 @@ const holders = computed(() => {
 
         &-top {
             width: 100%;
-            height: 2em;
+            height: 2 zxem;
             background-color: var(--balcony-color);
             border-radius: var(--shadow-size);
             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.125), rgba(0, 0, 0, 0.05));

@@ -4,7 +4,7 @@
   <div :class="bemm()">
     <div :class="bemm('tools')">
       <Form>
-        <InputRange label="Windows" v-model="windows" min="1" max="6"></InputRange>
+        <InputRange label="Windows" v-model="windows" :min="1" :max="6"></InputRange>
         <InputColor label="Balcony color" v-model="color"></InputColor>
         <InputColor label="Wall color" v-model="wall"></InputColor>
       </Form>
